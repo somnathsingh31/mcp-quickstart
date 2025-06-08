@@ -13,6 +13,12 @@ logging.basicConfig(
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
+if not GROQ_API_KEY:          # None or empty string
+    raise RuntimeError(
+        "Missing environment variable: GROQ_API_KEY. "
+        "Export it (e.g., `export GROQ_API_KEY=...`) before running."
+    )
+
 class LLMInterface:
     def __init__(self):
         self.client = AsyncGroq(api_key=GROQ_API_KEY)
